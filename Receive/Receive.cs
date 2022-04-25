@@ -2,7 +2,7 @@
 using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Receive
 {
@@ -11,16 +11,18 @@ namespace Receive
         static void Main(string[] args)
         {
             try {
+                IConfiguration Config = new ConfigurationBuilder().AddJsonFile("appSettings.json").Build();
+
                 ConnectionFactory factory = new ConnectionFactory();
-                factory.UserName = "";
-                factory.Password = "";
-                factory.VirtualHost = "";
+                factory.UserName = Config.GetSection("credentials")["username"].ToString();
+                factory.Password = Config.GetSection("credentials")["password"].ToString();
+                factory.VirtualHost = Config.GetSection("vhost").Value;
                 // factory.Protocol = Protocols.FromEnvironment();
-                factory.HostName = "";
+                factory.HostName = Config.GetSection("hostname").Value;
                 factory.Port = AmqpTcpEndpoint.UseDefaultPort;
 
                 // create a connection and open a channel, dispose them when done
-                using(var connection = factory.CreateConnection()) {
+                using (var connection = factory.CreateConnection()) {
                     using(var channel = connection.CreateModel()) {
                         // ensure that the queue exists before we publish to it
                         var queueName = "helloqueue";
