@@ -12,7 +12,7 @@ namespace Chatter2
         public DateTime Tstamp;
         public String Sender;
         public String Msg;
-        //public string MsgType; //kalau mau dienhance, semisal chat atau event (join/left/ping dll) jadi nanti bisa dicustom display outputnya
+        public string MsgType = "event"; //kalau mau dienhance, semisal chat atau event (join/left/ping dll) jadi nanti bisa dicustom display outputnya
     }
 
     class Program

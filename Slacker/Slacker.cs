@@ -69,6 +69,8 @@ namespace Slacker
                         }
                         //routing utk DM
                         channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: "dm_" + username.ToLower()); //musti bind ke exchange tipe direct
+                        //routing untuk broadcast
+                        channel.QueueBind(queue: queueName, exchange: "amq.fanout", routingKey: ""); //bind ke fanout exchange
 
                         //consume part
                         var consumer = new EventingBasicConsumer(channel);
