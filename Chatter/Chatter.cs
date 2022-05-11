@@ -3,6 +3,7 @@ using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Chatter
 {

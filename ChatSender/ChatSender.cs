@@ -2,6 +2,7 @@
 using RabbitMQ.Client;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace ChatSender
 {
